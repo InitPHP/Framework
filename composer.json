@@ -24,7 +24,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "initphp/router": "^1.0",
         "initphp/dotenv": "^1.0",
         "initphp/config": "^1.0",
