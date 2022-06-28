@@ -17,25 +17,18 @@ if (!defined('BASE_DIR')) {
 }
 
 if(!function_exists('view')){
-    function view(string $view, array $data = []): string
+    /**
+     * @param string|string[] $view
+     * @param array $data
+     * @return string
+     */
+    function view(string|array $view, array $data = []): string
     {
-        if(substr($view, -4) !== '.php'){
-            $view .= '.php';
+        if(is_string($view)){
+            $view = [$view];
         }
-        $_init_php_view_path = APP_DIR . 'Views' . DIRECTORY_SEPARATOR . $view;
-        if(!is_file($_init_php_view_path)){
-            throw new \InitPHP\Framework\Exception\FrameworkException('The view file ' . $view . ' cannot be found.');
-        }
-        if(!empty($data)){
-            extract($data);
-        }
-        ob_start();
-        require $_init_php_view_path;
-        if(($content = ob_get_contents()) === FALSE){
-            $content = '';
-        }
-        ob_end_clean();
-        return $content;
+        $viewer = new \InitPHP\Framework\Viewer($view, $data);
+        return $viewer->handler();
     }
 }
 
@@ -68,9 +61,9 @@ if(!function_exists('trans')){
 }
 
 if(!function_exists('base_url')){
-    function base_url(?string $path = null)
+    function base_url(?string $path = null): string
     {
-        $base_url = config('base.base_url');
+        $base_url = config('base.base_url', '');
         if($path === null || $path == '/'){
             return $base_url;
         }
@@ -80,7 +73,7 @@ if(!function_exists('base_url')){
 }
 
 if(!function_exists('redirect')){
-    function redirect(?string $url = null, int $second = 0, int $status = 302)
+    function redirect(?string $url = null, int $second = 0, int $status = 302): void
     {
         if($url === null){
             $url = config('base.base_url');

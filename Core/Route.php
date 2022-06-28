@@ -13,6 +13,7 @@
 
 namespace InitPHP\Framework;
 
+use InitPHP\Container\Container;
 use \InitPHP\HTTP\{Request, Response, Stream};
 use InitPHP\Router\Router;
 use Psr\Http\Message\ResponseInterface;
@@ -104,6 +105,7 @@ final class Route
                 ],
                 'basePath'          => $basePath,
                 'variableMethods'   => env('VARIABLE_METHOD', false),
+                'container'         => new Container()
             ]);
         }
         return self::$router;

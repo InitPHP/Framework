@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use InitPHP\Framework\Viewer;
+
 class HomeController extends \InitPHP\Framework\BaseController
 {
     public function index()
     {
-        # \InitPHP\Framework\Logger::alert('Hello World! :)');
-
-        return view('welcome');
+        return new Viewer(['welcome'], []);
     }
 
     public function home()
