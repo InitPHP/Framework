@@ -31,7 +31,6 @@
         "initphp/translator": "^0.2.0",
         "initphp/input": "^1.0",
         "initphp/events": "^1.0",
-        "initphp/logger": "^1.0",
         "initphp/database": "^1.0",
         "initphp/container": "^0.2.0"
     }
