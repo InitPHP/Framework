@@ -28,10 +28,10 @@
         "initphp/router": "^1.0",
         "initphp/dotenv": "^1.0",
         "initphp/config": "^1.0",
-        "initphp/translator": "^0.2.0",
+        "initphp/translator": "^0.2",
         "initphp/input": "^1.0",
         "initphp/events": "^1.0",
         "initphp/database": "^1.0",
-        "initphp/container": "^0.2.0"
+        "initphp/container": "^0.3"
     }
 }
