@@ -28,34 +28,44 @@ use function ob_end_clean;
 final class Viewer
 {
 
-    protected array $views = [];
+    protected static array $views = [];
 
-    protected array $data = [];
+    protected static array $data = [];
 
     public function __construct(array $views, array $data = [])
     {
         foreach ($views as $view) {
-            if(($view = $this->viewFileCheck($view)) === FALSE){
+            if(($view = self::viewFileCheck($view)) === FALSE){
                 throw new FrameworkException('View "' . $view . '" not found.');
             }
-            $this->views[] = $view;
+            self::$views[] = $view;
         }
-        $this->data = $data;
+        self::$data = $data;
     }
-
 
     public function __toString(): string
     {
         return $this->handler();
     }
 
+    public static function require(string $view)
+    {
+        if(($view = self::viewFileCheck($view)) === FALSE){
+            throw new FrameworkException('View "' . $view . '" not found.');
+        }
+        if(!empty(self::$data)){
+            extract(self::$data);
+        }
+        require $view;
+    }
+
     public function handler(): string
     {
-        if(!empty($this->data)){
-            extract($this->data);
+        if(!empty(self::$data)){
+            extract(self::$data);
         }
         ob_start();
-        foreach ($this->views as $view) {
+        foreach (self::$views as $view) {
             require $view;
         }
         if(($content = ob_get_contents()) === FALSE){
@@ -65,7 +75,7 @@ final class Viewer
         return $content;
     }
 
-    private function viewFileCheck(string $view): string|false
+    private static function viewFileCheck(string $view): string|false
     {
         if(!str_ends_with($view, '.php')){
             $view .= '.php';
