@@ -18,6 +18,8 @@ use \InitPHP\HTTP\{Request, Response, Stream};
 use InitPHP\Router\Router;
 use Psr\Http\Message\ResponseInterface;
 use function function_exists;
+use function env;
+use function substr;
 
 /**
  * @mixin Router

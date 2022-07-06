@@ -5,7 +5,7 @@ namespace App\Controllers;
 
 use InitPHP\Framework\Viewer;
 
-class HomeController extends \InitPHP\Framework\BaseController
+class HomeController
 {
     public function index()
     {

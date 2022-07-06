@@ -1,8 +1,3 @@
-<?php
-if (!defined('BASE_DIR')) {
-    die("Access denied.");
-}
-?>
 <!doctype html>
 <html lang="en" class="h-100">
 <head>

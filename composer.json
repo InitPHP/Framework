@@ -32,6 +32,7 @@
         "initphp/input": "^1.0",
         "initphp/events": "^1.0",
         "initphp/database": "^1.0",
-        "initphp/container": "^0.3"
+        "initphp/container": "^0.3",
+        "initphp/console": "^1.0"
     }
 }

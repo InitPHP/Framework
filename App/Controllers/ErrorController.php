@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-class ErrorController extends \InitPHP\Framework\BaseController
+class ErrorController
 {
 
     public function pageNotFound()
