@@ -1,0 +1,70 @@
+#!/usr/bin/env php
+<?php
+if(isset($GLOBALS['_composer_autoload_path'])){
+    define('INIT_PHP_COMPOSER_AUTOLOAD_PHP', $GLOBALS['_composer_autoload_path']);
+}else{
+    foreach ([
+                 __DIR__ . '/../../autoload.php',
+                 __DIR__ . '/../vendor/autoload.php',
+                 __DIR__ . '/vendor/autoload.php'
+             ] as $file) {
+        if(file_exists($file)){
+            define('INIT_PHP_COMPOSER_AUTOLOAD_PHP', $file);
+            break;
+        }
+    }
+}
+if(!defined("INIT_PHP_COMPOSER_AUTOLOAD_PHP")){
+    echo "\e[41;1;97mComposer autoload file not found. " . PHP_EOL . "Try running the \"composer install\" command.\e[0m" . PHP_EOL;
+    exit;
+}
+
+foreach ([
+    __DIR__,
+    dirname(INIT_PHP_COMPOSER_AUTOLOAD_PHP, 2),
+    getcwd()
+] as $dir) {
+    if(file_exists($dir . '/App/') && file_exists($dir . '/Core/')){
+        define('BASE_DIR', $dir);
+        break;
+    }
+}
+const APP_DIR       = BASE_DIR . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR;
+const CORE_DIR      = BASE_DIR . DIRECTORY_SEPARATOR . 'Core' . DIRECTORY_SEPARATOR;
+
+require_once INIT_PHP_COMPOSER_AUTOLOAD_PHP;
+use InitPHP\Console\Console as Application;
+
+$app = new Application();
+
+$commands = [
+    new \InitPHP\Framework\Console\Commands($app)
+];
+
+$autoload = new \App\Configs\Autoload();
+$app_commands = $autoload->get('console_commands', []);
+if(!empty($app_commands) && is_array($app_commands)){
+    foreach ($app_commands as $app_command) {
+        if(!class_exists($app_command)){
+            $app->warning('"' . $app_command . '" command class not found.');
+            echo PHP_EOL;
+            continue;
+        }
+        $reflection = new ReflectionClass($app_command);
+        if(!$reflection->isSubclassOf(\InitPHP\Framework\Console\CommandAbstract::class)){
+            $app->warning('The "' . $app_command . '" class must extends \\InitPHP\\Framework\\Console\\CommandAbstract.');
+            echo PHP_EOL;
+            continue;
+        }
+        $commands[] = $reflection->newInstanceArgs([$app]);
+    }
+}
+
+foreach ($commands as $command) {
+    if($command === null){
+        continue;
+    }
+    $app = $command->register();
+}
+
+$app->run();

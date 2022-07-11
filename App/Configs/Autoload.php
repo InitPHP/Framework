@@ -14,5 +14,8 @@ class Autoload extends \InitPHP\Framework\BaseConfig
         'App'
     ];
 
+    public array $console_commands = [
+        \App\Console\ExampleCommand::class
+    ];
 
 }
