@@ -8,7 +8,7 @@ use InitPHP\Config\Classes;
 class Database extends Classes
 {
 
-    public bool $enable = true;
+    public bool $enable = false;
 
     public string $dsn = 'mysql:host=localhost;port=3306;dbname=deneme;charset=utf8mb4';
 
