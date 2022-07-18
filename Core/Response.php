@@ -1,6 +1,6 @@
 <?php
 /**
- * CommandAbstract.php
+ * Response.php
  *
  * This file is part of Framework.
  *
@@ -13,20 +13,12 @@
 
 declare(strict_types=1);
 
-namespace InitPHP\Framework\Console;
+namespace InitPHP\Framework;
 
-use InitPHP\Console\Console;
-
-abstract class CommandAbstract
+class Response extends \InitPHP\HTTP\Response
 {
-
-    protected Console $console;
-
-    public function __construct(Console $console)
+    public function __construct()
     {
-        $this->console = $console;
+        parent::__construct(200, [], (new Stream('')), '1.1', null);
     }
-
-    abstract public function register(): Console;
-
 }

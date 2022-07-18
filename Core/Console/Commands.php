@@ -7,7 +7,7 @@
  * @author     Muhammet ŞAFAK <info@muhammetsafak.com.tr>
  * @copyright  Copyright © 2022 Muhammet ŞAFAK
  * @license    ./LICENSE  MIT
- * @version    1.0
+ * @version    1.1
  * @link       https://www.muhammetsafak.com.tr
  */
 
@@ -60,7 +60,7 @@ final class Commands extends CommandAbstract
             $this->console->warning('A controller named ' . $name . ' already exists.');
             exit;
         }
-        $content = '<?php' . PHP_EOL . 'declare(strict_types=1);' . PHP_EOL . PHP_EOL . 'namespace App\\Controllers;' . PHP_EOL . PHP_EOL . 'class ' . $name . ' ' . PHP_EOL . '{ ' . PHP_EOL . PHP_EOL . '    public function index() ' . PHP_EOL . '    {' . PHP_EOL . '        return "Hello World!";' . PHP_EOL . '    }' . PHP_EOL . PHP_EOL . '}' . PHP_EOL;
+        $content = '<?php' . PHP_EOL . 'declare(strict_types=1);' . PHP_EOL . PHP_EOL . 'namespace App\\Controllers;' . PHP_EOL . PHP_EOL . 'class ' . $name . ' extends \\InitPHP\\Framework\\Base ' . PHP_EOL . '{ ' . PHP_EOL . PHP_EOL . '    public function index() ' . PHP_EOL . '    {' . PHP_EOL . '        return "Hello World!";' . PHP_EOL . '    }' . PHP_EOL . PHP_EOL . '}' . PHP_EOL;
         if(@file_put_contents($path, $content) === FALSE){
             $this->console->error('Failed to create "' . $name . '" controller');
             exit;
@@ -84,7 +84,7 @@ final class Commands extends CommandAbstract
             $this->console->warning('A config named "' . $name . '" already exists.');
             exit;
         }
-        $content = '<?php' . PHP_EOL . 'declare(strict_types=1); ' . PHP_EOL . PHP_EOL . 'namespace App\\Configs; ' . PHP_EOL . PHP_EOL . 'class ' . $name . ' extends \\InitPHP\\Framework\\BaseConfig ' . PHP_EOL . '{ ' . PHP_EOL . PHP_EOL . '    public ?string $conf = null; ' . PHP_EOL . PHP_EOL . '}' . PHP_EOL;
+        $content = '<?php' . PHP_EOL . 'declare(strict_types=1); ' . PHP_EOL . PHP_EOL . 'namespace App\\Configs; ' . PHP_EOL . PHP_EOL . 'class ' . $name . ' extends \\InitPHP\\Config\\Classes ' . PHP_EOL . '{ ' . PHP_EOL . PHP_EOL . '    public ?string $conf = null; ' . PHP_EOL . PHP_EOL . '}' . PHP_EOL;
         if(@file_put_contents($path, $content) === FALSE){
             $this->console->error("Failed to create configuration file.");
             exit;

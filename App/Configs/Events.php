@@ -5,18 +5,18 @@ if (!defined('BASE_DIR')) {
 }
 use InitPHP\Events\Events;
 
-Events::on('before_bootstrap', function () {
+Events::on('before_boot', function () {
     return;
 });
 
 /*
-Events::on('after_bootstrap', function () {
+Events::on('after_boot', function () {
     return;
 });
 */
 
 /*
-Events::on('after_emitter', function () {
+Events::on('after_application', function () {
     return;
 });
 */

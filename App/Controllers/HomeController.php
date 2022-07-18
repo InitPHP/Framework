@@ -3,19 +3,21 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use InitPHP\Framework\Viewer;
-
-class HomeController
+class HomeController extends \InitPHP\Framework\Base
 {
     public function index()
     {
-        return new Viewer(['welcome'], [
+        return view('welcome', [
             'title'     => 'Welcome to InitPHP Framework'
         ]);
     }
 
     public function home()
     {
-        return view('welcome');
+        $views = ['welcome'];
+        $data = [
+            'title'     => 'Welcome to InitPHP Framework'
+        ];
+        return view($views, $data);
     }
 }

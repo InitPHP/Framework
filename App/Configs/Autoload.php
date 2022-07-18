@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace App\Configs;
 
-class Autoload extends \InitPHP\Framework\BaseConfig
+use InitPHP\Config\Classes;
+
+class Autoload extends Classes
 {
     public array $configs = [
         Base::class,
-        Storage::class,
     ];
 
     public array $helpers = [

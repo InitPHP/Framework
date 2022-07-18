@@ -1,6 +1,6 @@
 <?php
 /**
- * CommandAbstract.php
+ * Stream.php
  *
  * This file is part of Framework.
  *
@@ -13,20 +13,12 @@
 
 declare(strict_types=1);
 
-namespace InitPHP\Framework\Console;
+namespace InitPHP\Framework;
 
-use InitPHP\Console\Console;
-
-abstract class CommandAbstract
+final class Stream extends \InitPHP\HTTP\Stream
 {
-
-    protected Console $console;
-
-    public function __construct(Console $console)
+    public function __construct(string $body = '')
     {
-        $this->console = $console;
+        parent::__construct($body, null);
     }
-
-    abstract public function register(): Console;
-
 }

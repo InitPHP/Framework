@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Configs;
 
-class Base extends \InitPHP\Framework\BaseConfig
+use InitPHP\Config\Classes;
+
+class Base extends Classes
 {
 
     public string $base_url = 'http://framework.lvh.me';

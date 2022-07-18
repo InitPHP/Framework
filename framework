@@ -33,12 +33,16 @@ const APP_DIR       = BASE_DIR . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARAT
 const CORE_DIR      = BASE_DIR . DIRECTORY_SEPARATOR . 'Core' . DIRECTORY_SEPARATOR;
 
 require_once INIT_PHP_COMPOSER_AUTOLOAD_PHP;
-use InitPHP\Console\Console as Application;
+use InitPHP\Console\Console;
 
-$app = new Application();
+$app = new \InitPHP\Framework\Application();
+
+require_once APP_DIR . "Configs/Routers.php";
+
+$console = new Console();
 
 $commands = [
-    new \InitPHP\Framework\Console\Commands($app)
+    new \InitPHP\Framework\Console\Commands($console)
 ];
 
 $autoload = new \App\Configs\Autoload();
@@ -46,17 +50,17 @@ $app_commands = $autoload->get('console_commands', []);
 if(!empty($app_commands) && is_array($app_commands)){
     foreach ($app_commands as $app_command) {
         if(!class_exists($app_command)){
-            $app->warning('"' . $app_command . '" command class not found.');
+            $console->warning('"' . $app_command . '" command class not found.');
             echo PHP_EOL;
             continue;
         }
         $reflection = new ReflectionClass($app_command);
         if(!$reflection->isSubclassOf(\InitPHP\Framework\Console\CommandAbstract::class)){
-            $app->warning('The "' . $app_command . '" class must extends \\InitPHP\\Framework\\Console\\CommandAbstract.');
+            $console->warning('The "' . $app_command . '" class must extends \\InitPHP\\Framework\\Console\\CommandAbstract.');
             echo PHP_EOL;
             continue;
         }
-        $commands[] = $reflection->newInstanceArgs([$app]);
+        $commands[] = $reflection->newInstanceArgs([$console]);
     }
 }
 
@@ -64,7 +68,7 @@ foreach ($commands as $command) {
     if($command === null){
         continue;
     }
-    $app = $command->register();
+    $console = $command->register();
 }
 
-$app->run();
+$console->run();

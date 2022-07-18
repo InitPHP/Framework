@@ -9,9 +9,9 @@
             "App\\": "App/"
         },
         "files": [
-            "Core/Helpers.php",
-            "App/Configs/Events.php",
-            "App/Configs/Routers.php"
+            "Core/Helpers/Str_helper.php",
+            "Core/Helpers/Main_helper.php",
+            "App/Configs/Events.php"
         ]
     },
     "authors": [
@@ -24,16 +24,19 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=8.0",
+        "php": ">=7.4",
+        "ext-pdo": "*",
+        "initphp/console": "^1.0",
+        "initphp/container": "^0.3",
         "initphp/router": "^1.0",
         "initphp/dotenv": "^1.0",
         "initphp/config": "^1.0",
         "initphp/translator": "^0.2",
-        "initphp/input": "^1.0",
         "initphp/events": "^1.0",
         "initphp/database": "^1.0",
-        "initphp/container": "^0.3",
-        "initphp/console": "^1.0"
+        "initphp/cache": "^0.1",
+        "initphp/logger": "^1.0",
+        "initphp/input": "^1.0"
     },
     "bin": [
         "framework"
