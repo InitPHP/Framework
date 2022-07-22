@@ -144,21 +144,18 @@ final class Application
     private function http_router_boot()
     {
         $options = [
-            'controller'        => [
-                'path'      => APP_DIR . 'Controllers' . DIRECTORY_SEPARATOR,
-                'namespace' => "\\App\\Controllers\\"
+            'paths'             => [
+                'controller'    => APP_DIR . 'Controllers' . DIRECTORY_SEPARATOR,
+                'middleware'    => APP_DIR . 'Middlewares' . DIRECTORY_SEPARATOR,
             ],
-            'middleware'        => [
-                'path'      => APP_DIR . 'Middlewares' . DIRECTORY_SEPARATOR,
-                'namespace' => "\\App\\Middlewares\\"
+            'namespaces'        => [
+                'controller'    => '\\App\\Controllers\\',
+                'middleware'    => '\\App\\Middlewares\\'
             ],
-            'basePath'          => \env('BASE_PATH', '/'),
-            'variableMethods'   => \env('VARIABLE_METHOD', false),
+            'base_path'         => \env('BASE_PATH', '/'),
+            'variable_method'   => \env('VARIABLE_METHOD', false),
             'container'         => Stack::get('container')
         ];
-        if(\str_starts_with($options['basePath'], '/')){
-            $options['basePath'] = \ltrim($options['basePath'], '/');
-        }
         $this->_attributes['router'] = new Router($this->_attributes['request'], $this->_attributes['response'], $options);
         Stack::set('router', $this->_attributes['router']);
     }

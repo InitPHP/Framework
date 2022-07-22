@@ -10,5 +10,5 @@ const VERSION = '1.1';
 require_once BASE_DIR . "vendor/autoload.php";
 
 $app = new \InitPHP\Framework\Application();
-require_once APP_DIR . 'Configs/Routers.php';
+require_once APP_DIR . 'Configs/Routes.php';
 $app->run();

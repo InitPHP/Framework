@@ -26,13 +26,6 @@ namespace InitPHP\Framework;
  * @method static \InitPHP\Router\Router options(string $path, string|\Closure|array $execute, array $options = [])
  * @method static \InitPHP\Router\Router patch(string $path, string|\Closure|array $execute, array $options = [])
  * @method static \InitPHP\Router\Router head(string $path, string|\Closure|array $execute, array $options = [])
- * @method static \InitPHP\Router\Router xget(string $path, string|\Closure|array $execute, array $options = [])
- * @method static \InitPHP\Router\Router xpost(string $path, string|\Closure|array $execute, array $options = [])
- * @method static \InitPHP\Router\Router xput(string $path, string|\Closure|array $execute, array $options = [])
- * @method static \InitPHP\Router\Router xdelete(string $path, string|\Closure|array $execute, array $options = [])
- * @method static \InitPHP\Router\Router xoptions(string $path, string|\Closure|array $execute, array $options = [])
- * @method static \InitPHP\Router\Router xpatch(string $path, string|\Closure|array $execute, array $options = [])
- * @method static \InitPHP\Router\Router xhead(string $path, string|\Closure|array $execute, array $options = [])
  * @method static \InitPHP\Router\Router any(string $path, string|\Closure|array $execute, array $options = [])
  * @method static void group(string $prefix, \Closure $group, array $options = [])
  * @method static void domain(string $domain, \Closure $group, array $options = [])
@@ -40,18 +33,16 @@ namespace InitPHP\Framework;
  * @method static void ip(string|string[] $ip, \Closure $group, array $options = [])
  * @method static void controller(string $controller, string $prefix = '')
  * @method static void error_404(string|\Closure|array $execute, array $options = [])
+ * @method static \InitPHP\Router\Router pattern(string $key, string $pattern)
  * @method static \InitPHP\Router\Router where(string $key, string $pattern)
- * @method static null|string currentController()
- * @method static null|string currentCMethod()
- * @method static array currentCArguments()
  * @method static \Psr\Http\Message\ResponseInterface dispatch()
  */
 final class Route
 {
 
-    public const POSITION_AFTER = \InitPHP\Router\Router::POSITION_AFTER;
-    public const POSITION_BEFORE = \InitPHP\Router\Router::POSITION_BEFORE;
-    public const POSITION_BOTH = \InitPHP\Router\Router::POSITION_BOTH;
+    public const POSITION_AFTER = \InitPHP\Router\Router::AFTER;
+    public const POSITION_BEFORE = \InitPHP\Router\Router::BEFORE;
+    public const POSITION_BOTH = \InitPHP\Router\Router::BOTH;
 
     public function __call($name, $arguments)
     {

@@ -37,7 +37,7 @@ use InitPHP\Console\Console;
 
 $app = new \InitPHP\Framework\Application();
 
-require_once APP_DIR . "Configs/Routers.php";
+require_once APP_DIR . "Configs/Routes.php";
 
 $console = new Console();
 

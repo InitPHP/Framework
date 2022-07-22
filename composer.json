@@ -28,6 +28,7 @@
         "ext-pdo": "*",
         "initphp/console": "^1.0",
         "initphp/container": "^0.3",
+        "initphp/http": "^1.0",
         "initphp/router": "^1.0",
         "initphp/dotenv": "^1.0",
         "initphp/config": "^1.0",
