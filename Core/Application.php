@@ -72,8 +72,7 @@ final class Application
             return;
         }
         $db = new DB($config->all());
-        $db->connection();
-        $db->asConnectionGlobal();
+        $db->connectionAsGlobal();
         Stack::set('db', $db);
     }
 
